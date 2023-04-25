@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "drf-prac-todo"
+version = "0.1.0"
+description = ""
+authors = ["2017250297-choi <97ckdtn@gmail.com>"]
+readme = "README.md"
+packages = [{include = "drf_prac_todo"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "^4.2"
+django-dotenv = "^1.4.2"
+djangorestframework = "^3.14.0"
+django-cors-headers = "^3.14.0"
+djangorestframework-simplejwt = "^5.2.2"
+drf-yasg = "^1.21.5"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

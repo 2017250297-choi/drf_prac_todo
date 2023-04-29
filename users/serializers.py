@@ -11,7 +11,6 @@ class UserSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
     def create(self, validated_data):
-        print(validated_data)
         del validated_data["password2"]
         user = super().create(validated_data)
         password = user.password
@@ -52,7 +51,6 @@ class UserEditSerializer(UserSerializer):
         exclude = ("email",)
 
     def update(self, instance, validated_data):
-        print(validated_data)
         validated_data.pop("password2", None)
         validated_data.pop("current_password", None)
         if validated_data.get("password"):

@@ -8,5 +8,4 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
             return True
 
         # 요청자(request.user)가 todolist user_id와 동일한지 확인
-        print(obj.user_id == request.user)
         return obj.user_id == request.user

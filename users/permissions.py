@@ -13,9 +13,7 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
 
 class IsExsistDeleteXorCreateOnly(permissions.BasePermission):
     def has_permission(self, request, view):
-        print(bool(request.user and request.user.is_authenticated))
         if request.method == "POST":
-            print()
             return not bool(request.user and request.user.is_authenticated)
         elif request.method == "DELETE":
             return bool(request.user and request.user.is_authenticated)

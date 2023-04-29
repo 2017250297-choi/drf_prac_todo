@@ -3,9 +3,11 @@ from todolists.models import TodoList
 
 
 class TodoListSerializer(serializers.ModelSerializer):
+    user = serializers.StringRelatedField(source="user_id")
+
     class Meta:
         model = TodoList
-        fields = "__all__"
+        exclude = ("user_id",)
 
 
 class TodoListCreateSerializer(serializers.ModelSerializer):

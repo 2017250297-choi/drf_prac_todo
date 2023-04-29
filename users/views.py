@@ -12,11 +12,9 @@ from users.serializers import (
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
 )
-from todolists.models import TodoList
 from todolists.serializers import TodoListSerializer
 from users.models import User
 from rest_framework.generics import get_object_or_404
-from rest_framework_simplejwt.tokens import RefreshToken
 
 
 # Create your views here.
@@ -33,8 +31,6 @@ class UserView(APIView):
 
     def delete(self, request):
         user = request.user
-        if not user.is_authenticated:
-            return Response("Please Login", status=status.HTTP_403_FORBIDDEN)
         user = User.objects.get(id=user.id)
         user.delete()
         return Response("delete_success", status=status.HTTP_204_NO_CONTENT)

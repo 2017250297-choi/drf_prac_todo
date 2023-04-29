@@ -49,4 +49,5 @@ urlpatterns = [
     ),
     path("admin/", admin.site.urls),
     path("todolist/", include("todolists.urls")),
+    path("user/", include("users.urls")),
 ]

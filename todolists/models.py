@@ -1,4 +1,5 @@
 from django.db import models
+from users.models import User
 
 # import time
 from django.utils import timezone
@@ -14,7 +15,9 @@ class TodoList(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     completion_at = models.DateTimeField(null=True, blank=True)
-    # user_id = models.ForeignKey()
+    user_id = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="my_todolist"
+    )
 
     def save(self, *args, **kwargs):
         if self.is_complete:

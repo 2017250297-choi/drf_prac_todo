@@ -13,5 +13,6 @@ urlpatterns = [
         views.CustomTokenObtaionPairVeiw.as_view(),
         name="token_obtain_view",
     ),
+    path("token/verify/", views.MockView.as_view(), name="verify_view"),
     path("refresh/", TokenRefreshView.as_view(), name="token_refresh_view"),
 ]

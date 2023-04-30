@@ -33,7 +33,9 @@ class UserView(APIView):
         user = request.user
         user = User.objects.get(id=user.id)
         user.delete()
-        return Response("delete_success", status=status.HTTP_204_NO_CONTENT)
+        return Response(
+            {"message": "delete_success"}, status=status.HTTP_204_NO_CONTENT
+        )
 
 
 class UserInfoView(APIView):
@@ -68,3 +70,10 @@ class UserInfoView(APIView):
 
 class CustomTokenObtaionPairVeiw(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
+
+
+class MockView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request):
+        return Response({"success": "yes"}, status=status.HTTP_200_OK)

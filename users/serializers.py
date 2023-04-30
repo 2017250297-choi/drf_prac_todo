@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import User
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+import re
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -23,7 +24,27 @@ class UserSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(
                 {"password": "Password fields didn't match."}
             )
-        return attrs
+        if attrs.get("password") != None:
+            if (
+                re.match("^[0-9]*$", attrs.get("password"))
+                or len(attrs.get("password")) < 8
+            ):
+                raise serializers.ValidationError(
+                    {
+                        "password": "Password needs to longer than 7 letters and not entirely numeric."
+                    }
+                )
+        if attrs.get("name") != None:
+            if len(attrs.get("name").strip()) < 3:
+                raise serializers.ValidationError(
+                    {"Name": "Name needs to longer than 2 letters."}
+                )
+        if attrs.get("age") != None:
+            if attrs.get("age") <= 0:
+                raise serializers.ValidationError(
+                    {"age": "age needs to bigger than 0."}
+                )
+        return super().validate(attrs)
 
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):

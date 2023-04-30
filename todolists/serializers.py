@@ -16,3 +16,10 @@ class TodoListCreateSerializer(serializers.ModelSerializer):
         fields = [
             "title",
         ]
+
+    def validate(self, attrs):
+        if len(attrs.get("title").strip()) < 3:
+            raise serializers.ValidationError(
+                {"title": "title needs to longer than 2 letters."}
+            )
+        return super().validate(attrs)
